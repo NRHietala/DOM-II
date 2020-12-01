@@ -7,8 +7,8 @@ navLinks.forEach(link => link.addEventListener('click', function (e) {
 const title = document.querySelector("h1");
 const banner = document.querySelector('header img');
 const link = document.querySelector('a')
-const images = document.querySelectorAll("img");
-const map = document.querySelectorAll(".content-section img");
+const map = document.querySelector(".content-section img");
+const body = document.body;
 
 // Event Listeners
 
@@ -26,56 +26,62 @@ window.addEventListener("resize", resize);
 
 document.addEventListener("scroll", scroll);
 
-banner.addEventListener("mousedown", mouseDown)
-
 document.addEventListener("dblclick", dblClick);
 
-document.addEventListener("drag/drop", popAndDrop);
+document.addEventListener("contextmenu", contextClick);
+
+// Propagation Events (bubbling) 
+map.addEventListener("mousedown",mouseDown)
+body.addEventListener("mousedown", mouseDown)
+document.addEventListener("mousedown", mouseDown)
 
 // Events
+
+function mouseDown(e) {
+  console.log(`You're clicking down on ${e.target.nodeName}-> 
+    current target:${e.currentTarget.nodeName}` );
+    // stopping the bubble phase with stopProp/immediateStopPr
+    e.stopPropagation();
+}
+
 function mouseOver() {
     console.log('You moused over the h1 tag')
 }
 
-function mouseDown(e) {
-  console.log(`You're clicking down on ${e.target.nodeName}`);
-}
-
 function wheelies() {
-    console.log("You're using the mouse wheel")
+  console.log("You're using the mouse wheel")
 }
 
 function keyDown () {
-    console.log("You pressed a key!")
+  console.log("You pressed a key!")
 }
 
 function load () {
-    alert("Congratulations, page has loaded successfully!")
+  alert("Congratulations, page has loaded successfully!")
 }
 
 function focus () {
-    console.log("Focus Actived!")
+  console.log("Focus Actived!")
 }
 
 function resize () {
-    console.log("THE WINDOW IS BEING RESIZED!!!!")
+  console.log("THE WINDOW IS BEING RESIZED!!!!")
 }
 
 function scroll () {
-    console.log("Keep scrollin' scrolllin' scrollin'...")
+  console.log("Keep scrollin' scrolllin' scrollin'...")
 }
 
 function select () {
-    console.log("You've been choosen!")
+  console.log("You've been choosen!")
 }
 
 function dblClick () {
-    console.log("User Double clicked")
+  console.log("User Double clicked")
 }
 
-function popAndDrop () {
-console.log(" ")
+function contextClick() {
+  console.log('You right-clicked!')
 }
-
 
 
